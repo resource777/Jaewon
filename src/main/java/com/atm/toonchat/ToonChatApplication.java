@@ -1,4 +1,4 @@
-package com.atm.toonchat.practice;
+package com.atm.toonchat;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
