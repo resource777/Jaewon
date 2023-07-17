@@ -1,4 +1,4 @@
-package com.atm.toonchat;
+package com.atm.toonchat.practice;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

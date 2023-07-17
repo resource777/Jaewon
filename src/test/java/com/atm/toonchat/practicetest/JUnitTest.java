@@ -1,3 +1,5 @@
+package com.atm.toonchat.practicetest;
+
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

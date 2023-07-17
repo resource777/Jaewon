@@ -1,4 +1,4 @@
-package com.atm.toonchat;
+package com.atm.toonchat.practice;
 
 import java.util.List;
 

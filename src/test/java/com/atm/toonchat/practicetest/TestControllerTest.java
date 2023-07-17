@@ -1,10 +1,6 @@
-package com.atm.toonchat;
+package com.atm.toonchat.practicetest;
 
-import static org.hibernate.Hibernate.*;
-import static org.junit.jupiter.api.Assertions.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
-
-import java.awt.*;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -20,6 +16,9 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+
+import com.atm.toonchat.practice.Member;
+import com.atm.toonchat.practice.MemberRepository;
 
 @SpringBootTest
 @AutoConfigureMockMvc
