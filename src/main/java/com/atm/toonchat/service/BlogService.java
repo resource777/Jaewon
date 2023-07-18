@@ -1,5 +1,7 @@
 package com.atm.toonchat.service;
 
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 
 import com.atm.toonchat.domain.Article;
@@ -15,5 +17,13 @@ public class BlogService {
 
 	public Article save(AddArticleRequest request){
 		return blogRepository.save(request.toEntity());
+	}
+	public List<Article> findAll(){
+		return blogRepository.findAll();
+	}
+
+	public Article findById(long id){
+		return blogRepository.findById(id)
+			.orElseThrow(() -> new IllegalArgumentException("not found: " + id));
 	}
 }
