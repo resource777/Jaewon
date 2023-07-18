@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -29,7 +30,7 @@ public class BlogApiController {
 			.body(savedArticle);
 	}
 	@GetMapping("/api/articles")
-	public ResponseEntity<List<ArticleResponse>> findAllAriticles(){
+	public ResponseEntity<List<ArticleResponse>> findAllArticles(){
 		List<ArticleResponse> articles = blogService.findAll()
 			.stream()
 			.map(ArticleResponse::new) // .map(x -> new ArticleResponse(x))
@@ -40,10 +41,17 @@ public class BlogApiController {
 	}
 
 	@GetMapping("/api/articles/{id}")
-	public ResponseEntity<ArticleResponse> findAriticle(@PathVariable long id){
+	public ResponseEntity<ArticleResponse> findArticle(@PathVariable long id){
 		Article article = blogService.findById(id);
 
 		return ResponseEntity.ok()
 			.body(new ArticleResponse(article));
+	}
+
+	@DeleteMapping("/api/articles/{id}")
+	public ResponseEntity<Void> deleteArticle(@PathVariable long id){
+		blogService.delete(id);
+		return ResponseEntity.ok()
+			.build();
 	}
 }
