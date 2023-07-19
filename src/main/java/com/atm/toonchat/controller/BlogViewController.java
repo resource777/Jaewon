@@ -39,9 +39,10 @@ public class BlogViewController {
 	}
 
 	@GetMapping("/new-article")
-	public String newArticle(@RequestParam Long id, Model model){
+	public String newArticle(@RequestParam(required = false) Long id, Model model){
 		if (id == null){
 			model.addAttribute("article",new ArticleViewResponse());
+			System.out.println("no id = " + id);
 		}
 		else{
 			Article article = blogService.findById(id);
