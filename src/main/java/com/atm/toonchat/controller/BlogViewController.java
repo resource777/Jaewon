@@ -42,7 +42,6 @@ public class BlogViewController {
 	public String newArticle(@RequestParam(required = false) Long id, Model model){
 		if (id == null){
 			model.addAttribute("article",new ArticleViewResponse());
-			System.out.println("no id = " + id);
 		}
 		else{
 			Article article = blogService.findById(id);
