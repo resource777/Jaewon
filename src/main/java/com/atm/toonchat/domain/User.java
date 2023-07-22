@@ -62,16 +62,16 @@ public class User implements UserDetails { //UserDetails 상속받아 인증 객
 
 	@Override //계정 잠금 여부
 	public boolean isAccountNonLocked() {
-		return false;
+		return true;
 	}
 
 	@Override //패스워드 만료 여부
 	public boolean isCredentialsNonExpired() {
-		return false;
+		return true;
 	}
 
 	@Override // 계정 사용 가능 여부
 	public boolean isEnabled() {
-		return false;
+		return true;
 	}
 }

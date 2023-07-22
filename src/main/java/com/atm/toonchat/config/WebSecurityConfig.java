@@ -3,10 +3,10 @@ package com.atm.toonchat.config;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
-import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
@@ -36,26 +36,26 @@ public class WebSecurityConfig {
 			.requestMatchers("/login", "/signup", "/user").permitAll()
 			.anyRequest().authenticated()
 			.and()
-			.formLogin(formLogin -> formLogin //폼 기반 로그인 설정
+			.formLogin() //폼 기반 로그인 설정
 				.loginPage("/login")
 				.defaultSuccessUrl("/articles")
-			)
-			.logout(logout -> logout // 로그아웃 설정
+			.and()
+			.logout() // 로그아웃 설정
 				.logoutSuccessUrl("/login")
 				.invalidateHttpSession(true)
-			)
-			.csrf(AbstractHttpConfigurer::disable) //csrf 비활성화
+			.and()
+			.csrf().disable() //csrf 비활성화
 			.build();
 	}
 
 	//인증 관리자 관련 설정
 	@Bean
-	public DaoAuthenticationProvider daoAuthenticationProvider() throws Exception {
-		DaoAuthenticationProvider daoAuthenticationProvider = new DaoAuthenticationProvider();
-		daoAuthenticationProvider.setUserDetailsService(userService);
-		daoAuthenticationProvider.setPasswordEncoder(bCryptPasswordEncoder());
-
-		return daoAuthenticationProvider;
+	public AuthenticationManager authenticationManager(HttpSecurity http, BCryptPasswordEncoder bCryptPasswordEncoder, UserDetailService userDetailService) throws Exception {
+		return http.getSharedObject(AuthenticationManagerBuilder.class)
+			.userDetailsService(userService)
+			.passwordEncoder(bCryptPasswordEncoder)
+			.and()
+			.build();
 	}
 
 	//패스워드 인코더로 사용할 빈 드록
